@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>正向的数据: {{name}}</p>
+        <p>computer反向的数据:{{revname}}</p>
+        <p style="color: red;">计算机属性是基于它们的响应式依赖进行缓存的,只在相关响应式依赖发生改变时它们才会重新求值。这就意味着只要 name 还没有发生改变</p>
+        <p>方法反向的数据:{{revname_thods()}}</p>
+        <ul>
+            <li>
+                方法
+            </li>
+            <li>computer计算属性,默认有get ,vm.xx,也能进行set</li>
+            <li>watch监听属性,Vue 通过 watch 选项提供了一个更通用的方法，来响应数据的变化。当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的</li>
+        </ul>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                name: "PUXIAOSHUAI"
+            },
+            methods: {
+                revname_thods: function () {
+                    console.log("执行了方法revname_thods");
+                    return this.name.split("").reverse().join("")
+                }
+            },
+            //计算进行数据缓存
+            computed: {
+                // revname: function () {
+                //     console.log("执行了计算revname");
+                //     return this.name.split("").reverse().join("")
+                // }
+                revname:{
+                    get:function(){
+                        return this.name.split("").reverse().join("")
+                    },
+                    set:function(v){
+                      this.name="新设置的值:"+v
+                    }
+                }
+            },
+            watch: {
+                name: function (newdata, olddata) {
+                    console.log("监听name值得改变");
+                }
+            }
+        })
+        console.log("计算属性默认有get属性获取的值："+vm.revname);
+    
+        console.log(vm.revname="我是蒲小帅啦啦啦");
+    </script>
+</body>
+
+</html>

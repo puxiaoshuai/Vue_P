@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>初始vue</title>
+</head>
+<body>
+    <p>除了数据 property，Vue 实例还暴露了一些有用的实例 property 与方法。它们都有前缀 $，以便与用户定义的 property 区分开来</p>
+    <div id="app">
+            {{name}}
+    </div>
+    <script>
+        let data={name:"蒲小帅111"}
+
+        let vm=new Vue({
+            el:"#app",
+            data:data,
+            created:function() {
+                console.log("初始化create");
+                console.log("name====",this.name);
+            },
+            mounted:function() {
+                console.log("==========mounted");
+            },
+            updated:function() {
+                // 数据更新的时候执行
+                console.log("========updated");
+            },
+            destroyed:function() {
+                console.log("=========destroyed");
+            },
+            watch:{
+                name:function(n,old){
+                    console.log("两个地方都可以监听",n);
+                    console.log("两个地方都可以监听",old);
+                }
+            }
+
+        })
+        console.log(vm);
+        console.log(vm.$data===data);
+        console.log(vm.$data.name);
+        // 这里还必须是单引号
+        vm.$watch('name',function (newa,odlv) {
+            console.log("新的数据",newa);
+            console.log("旧数据",odlv);
+          })
+    </script>
+</body>
+</html>

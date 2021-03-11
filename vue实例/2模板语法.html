@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ol>
+            <li><span>v-once</span>,执行一次性地插值，当数据改变时，插值处的内容不会更新，可在控制台修改看看效果</li>
+            <p v-once>v-once===={{name}}</p>
+            <li>为了输出真正的 HTML,写法注意：<span>v-html</span></li>
+            <p v-html="htmldata"></p>
+            <li><span>v-bind</span>进行属性的添加,缩写就是  :xx</li>
+            <li>{{}}使用javascript单个表达式</li>
+             <p>指令=======》</p>
+            <li v-if="showme">v-if,在控制台控制我的显示隐藏</li>
+            <li><button v-on:click="showtoast">点击我,v-on缩写就是 @</button></li>
+            <li>动态使用 v-on:[xxx],当 eventName 的值为 "focus" 时，v-on:[eventName] 将等价于 v-on:focus</li>
+        </ol>
+        
+        
+         
+    </div>
+    <script>
+        let vm=new Vue({
+            el:"#app",
+            data:{
+                name:"风雨送春归，飞雪迎春到。",
+                htmldata:'<span style="color:blue">我是html</span>',
+                showme:true
+            },
+            methods: {
+                showtoast:function(){
+                    alert("点击了我")
+                }
+            },
+        })
+    </script>
+</body>
+</html>
